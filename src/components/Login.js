@@ -13,18 +13,11 @@ const Login = () => {
   const submitButton = (e) => {
     e.preventDefault();
 
-    const {isemailValid, isValidPassword} = validateCredentials(
+    const validationRes = validateCredentials(
       userEmail.current.value,
       userPassword.current.value
     );
-
-    if (!isemailValid) {
-      setErrorMsg("Email is not correct");
-    } else if (!isValidPassword) {
-      setErrorMsg("Password is not correct");
-    } else if (isemailValid && isValidPassword) {
-      setErrorMsg(null);
-    }
+    setErrorMsg(validationRes)
   };
 
   const toggleEvent = (e) => {

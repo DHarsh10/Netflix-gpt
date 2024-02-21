@@ -1,14 +1,18 @@
 const validateCredentials = (email, password) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 
-    const isemailValid = emailRegex.test(email);
-    const isValidPassword = passwordRegex.test(password);
-
-    return {
-        isemailValid, isValidPassword
-    }
-}
+  const isemailValid = emailRegex.test(email);
+  const isValidPassword = passwordRegex.test(password);
 
 
-export default validateCredentials
+  if (!isemailValid) {
+    return "Email is not correct";
+  } else if (!isValidPassword) {
+    return "Password is not correct";
+  } else if (isemailValid && isValidPassword) {
+    return null;
+  }
+};
+
+export default validateCredentials;
