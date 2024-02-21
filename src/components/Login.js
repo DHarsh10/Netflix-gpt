@@ -1,14 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
+import validateCredentials from "../Utils/validateCredentials.js";
 
 const Login = () => {
+  const [isSignup, setIsSignup] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const userName = useRef(null);
+  const userEmail = useRef(null);
+  const userPassword = useRef(null);
+  let validationRes;
 
-  const[isSignup, setIsSignup] = useState(false)
+  const submitButton = (e) => {
+    e.preventDefault();
+
+    const {isemailValid, isValidPassword} = validateCredentials(
+      userEmail.current.value,
+      userPassword.current.value
+    );
+
+    if (!isemailValid) {
+      setErrorMsg("Email is not correct");
+    } else if (!isValidPassword) {
+      setErrorMsg("Password is not correct");
+    } else if (isemailValid && isValidPassword) {
+      setErrorMsg(null);
+    }
+  };
 
   const toggleEvent = (e) => {
     e.preventDefault();
     setIsSignup(!isSignup);
-  }
+  };
   return (
     <div className="relative">
       <Header />
@@ -20,10 +42,10 @@ const Login = () => {
         />
       </div>
 
-      <div className="absolute w-[40%] inset-0 m-auto top-40 ">
+      <div className="absolute w-[30%] inset-0 m-auto top-40 ">
         <form
           action=""
-          className="bg-black px-20 py-12 flex flex-col gap-7 rounded-md"
+          className="bg-black px-20 py-12 flex flex-col gap-7 rounded-md bg-opacity-85"
         >
           <div className="font-bold text-[#fff] text-3xl mb-4">
             {!isSignup ? "Sign Up" : "Sign In"}
@@ -31,23 +53,30 @@ const Login = () => {
 
           {!isSignup && (
             <input
+              ref={userName}
               type="text"
               placeholder="Full Name"
-              className="px-4 py-3 rounded-sm bg-gray-800 border border-white-500"
+              className="px-4 py-3 rounded-sm bg-gray-800 border border-white-500 text-white"
             />
           )}
           <input
+            ref={userEmail}
             type="text"
             placeholder="Enter your Email"
-            className="px-4 py-3 rounded-sm bg-gray-800 border border-white-500"
+            className="px-4 py-3 rounded-sm bg-gray-800 border border-white-500 text-white"
           />
           <input
+            ref={userPassword}
             type="password"
             placeholder="Password"
-            className="px-4 py-3 rounded-sm bg-gray-800 border border-white-500"
+            className="px-4 py-3 rounded-sm bg-gray-800 border border-white-500 text-white"
           />
 
-          <button className="px-4 py-3 bg-[rgb(193,17,25)] text-white font-medium rounded-md">
+          {errorMsg && <p className="text-red-700 font-bold">{errorMsg}</p>}
+          <button
+            className="px-4 py-3 bg-[rgb(193,17,25)] text-white font-medium rounded-md"
+            onClick={submitButton}
+          >
             {!isSignup ? "Sign Up" : "Sign In"}
           </button>
 
