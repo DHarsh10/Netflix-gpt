@@ -48,7 +48,7 @@ const Header = () => {
   return (
     <div className="flex justify-between  absolute w-full p-8">
       <img
-        className="w-52 bg-gradient-to-b from-gray-900"
+        className="w-52 bg-gradient-to-b from-gray-900 hidden"
         src={require('../Utils/assets/images/netflixLogo.png')}
         alt="logo"
       />

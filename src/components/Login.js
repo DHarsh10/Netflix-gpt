@@ -96,7 +96,7 @@ const Login = () => {
 
       <div>
         <img
-          className=""
+          className="hidden"
           src={HOME_BG}
           alt="login-bg"
         />
