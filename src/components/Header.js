@@ -46,9 +46,9 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between  absolute w-full p-8">
+    <div className="flex justify-between  absolute top-0 w-full p-8 bg-gradient-to-b from-gray-900 z-10">
       <img
-        className="w-52 bg-gradient-to-b from-gray-900 hidden"
+        className="w-52"
         src={require('../Utils/assets/images/netflixLogo.png')}
         alt="logo"
       />
@@ -58,7 +58,7 @@ const Header = () => {
           <div className="px-4">
             <img src={url} alt="loginAvatar" className="w-10 rounded-3xl" />
           </div>
-          <button className="text-sm" onClick={signOutFunc}>
+          <button className="text-sm text-white" onClick={signOutFunc}>
             Signout
           </button>
         </div>

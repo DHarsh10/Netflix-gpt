@@ -2,45 +2,34 @@ import Header from "./Header";
 import useFetchData from "../customHooks/useFetchData";
 import { NOW_PLAYING_MOVIES_API, POPULAR_MOVIES_API } from "../Utils/constants";
 import { addNowPlayingMovies, addPopularMovies } from "../Utils/moviesSlice";
+import useFetchVideo from "../customHooks/useFetchVideo";
+import MainSection from "./MainSection";
 import { useSelector } from "react-redux";
+import SecondarySection from "./SecondarySection";
 
 const Browse = () => {
   useFetchData(NOW_PLAYING_MOVIES_API, addNowPlayingMovies, "nowPlayingMovies");
   useFetchData(POPULAR_MOVIES_API, addPopularMovies, "popularMovies");
 
   let nowPlayingMovies = useSelector(
-    (state) => state.movieSlice.nowPlayingMovies
+    (store) => store.movieSlice.nowPlayingMovies
   );
-  let popularMovies = useSelector((state) => state.movieSlice.popularMovies);
+
   if (!nowPlayingMovies) {
     return;
   }
-  // nowPlayingMovies.map(a => console.log(a))
+
+  let mainMovie = nowPlayingMovies[0];
+  const { id } = mainMovie;
+
+  
 
   return (
     <div>
-      <section className="h-32">
+      <section>
         <Header />
-        <div className="flex gap-10">
-          <div>
-            <h1> Now Playing Movies</h1>
-            <ol>
-              {nowPlayingMovies.map((a) => (
-                <li li className="text-red-700">{a.title}</li>
-              ))}
-            </ol>
-          </div>
-
-          <div>
-            <h1> Popular Movies</h1>
-            <ol>
-              {popularMovies &&
-                popularMovies.map((a) => (
-                  <li className="text-green-800">{a.title}</li>
-                ))}
-            </ol>
-          </div>
-        </div>
+        <MainSection movieId= {id} mainMovie = {mainMovie}/>
+        <SecondarySection />
       </section>
     </div>
   );
