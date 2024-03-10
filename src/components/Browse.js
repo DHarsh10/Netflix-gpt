@@ -2,7 +2,6 @@ import Header from "./Header";
 import useFetchData from "../customHooks/useFetchData";
 import { NOW_PLAYING_MOVIES_API, POPULAR_MOVIES_API } from "../Utils/constants";
 import { addNowPlayingMovies, addPopularMovies } from "../Utils/moviesSlice";
-import useFetchVideo from "../customHooks/useFetchVideo";
 import MainSection from "./MainSection";
 import { useSelector } from "react-redux";
 import SecondarySection from "./SecondarySection";
@@ -14,11 +13,20 @@ const Browse = () => {
   let nowPlayingMovies = useSelector(
     (store) => store.movieSlice.nowPlayingMovies
   );
+  
 
-  if (!nowPlayingMovies) {
+  let pM = useSelector(
+    (store) => store.movieSlice.popularMovies
+  );
+
+
+
+  if (!nowPlayingMovies || !pM) {
     return;
   }
 
+
+  
   let mainMovie = nowPlayingMovies[0];
   const { id } = mainMovie;
 
@@ -26,7 +34,7 @@ const Browse = () => {
 
   return (
     <div>
-      <section>
+      <section className="bg-black">
         <Header />
         <MainSection movieId= {id} mainMovie = {mainMovie}/>
         <SecondarySection />

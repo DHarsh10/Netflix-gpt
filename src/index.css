@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.slick-slider{
+    /* width: 92%; */
+    margin: auto;
+}
+
+.slick-list{
+    margin-right: 10px !important;
+}
+.slick-track{
+    display: flex !important;
+    gap: 10px ;
+}

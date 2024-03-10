@@ -1,19 +1,35 @@
-import React from 'react'
+import React from 'react';
+import Slider from "react-slick";
 
-const CarouselComponent = ({title, nowPlayingMovies}) => {
-    nowPlayingMovies.map(a => console.log(a.title))
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const CarouselComponent = ({title, moviesType}) => {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 5,
+      slidesToScroll: 5,
+    };
   return (
-    <div>
-        <div className='mx-12'>
-            <h1>{title}</h1>
-            <div className='flex gap-4 overflow-auto '>
-                {
-                   nowPlayingMovies.map(a => <img className='w-72' src={'https://image.tmdb.org/t/p/w500/' + a.backdrop_path}/>)
-                }
-            </div>
-        </div>
-    </div>
-  )
+    <>
+      <div className="mx-12 pb-14">
+        <h1 className="text-2xl font-bold pb-4 text-white">{title}</h1>
+        <div className="slider-container">
+            <Slider {...settings}>
+              {moviesType.map((a) => (
+                <img
+                  key={a.id}
+                  className="w-[19%] rounded-md"
+                  src={"https://image.tmdb.org/t/p/w500/" + a.backdrop_path}
+                />
+              ))}
+            </Slider>
+          </div>
+      </div>
+    </>
+  );
 }
 
 export default CarouselComponent
